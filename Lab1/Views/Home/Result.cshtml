@@ -1,0 +1,21 @@
+﻿@using Lab1.Controllers;
+@model CalculatorModel
+
+<h2>Second Result</h2>
+
+@{
+    HomeController controller = new HomeController(); // Создаем экземпляр контроллера
+    string operationWord = controller.GetOperationWord(Model.Operation);
+}
+
+Operation: @Model.Operand1 @operationWord @Model.Operand2 = @Model.Result
+
+<h2>Third Result</h2>
+
+Operation: @Model.Operand1 @Model.Operation @Model.Operand2 = @Model.Result
+
+
+
+
+
+

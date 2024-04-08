@@ -1,0 +1,45 @@
+﻿@model CalculatorModel
+@{
+    ViewBag.Title = "Калькулятор";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+@using (Html.BeginForm("Calculate", "Home", FormMethod.Post))
+{
+    @Html.LabelFor(model => model.Operand1)
+    @Html.TextBoxFor(model => model.Operand1)
+
+    @Html.DropDownListFor(model => model.Operation, new List<SelectListItem>
+    {
+        new SelectListItem{ Text = "+", Value = "+" },
+        new SelectListItem{ Text = "-", Value = "-" },
+        new SelectListItem{ Text = "*", Value = "*" },
+        new SelectListItem{ Text = "/", Value = "/" }
+    })
+
+    @Html.LabelFor(model => model.Operand2)
+    @Html.TextBoxFor(model => model.Operand2)
+
+    <input type="submit" value="Calculate" />
+    <input type="submit" name="Action" value="Clear" />
+
+    <br>
+    @Html.LabelFor(model => model.Result)
+    @Html.DisplayFor(model => model.Result)
+    <br>
+
+    @Html.ValidationSummary()
+
+    @if (Model.Result == ViewBag.TargetValue)
+    {
+        <p>Результат равен значению в ViewBag.</p>
+    }
+    else
+    {
+        <p>Результат не равен значению в ViewBag.</p>
+    }
+    @Html.ActionLink("Result", "Result", "Home", new { operand1 = Model.Operand1, operand2 = Model.Operand2, operation = Model.Operation, result = Model.Result }, null)
+
+}
